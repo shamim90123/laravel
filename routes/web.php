@@ -27,6 +27,22 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
+// routes/web.php
+use App\Http\Controllers\Auth\GoogleLoginController;
+
+Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback']);
+
+
+// routes/web.php (temporary debug route)
+Route::get('/debug-google', function () {
+    try {
+        return Socialite::driver('google')->redirect();
+    } catch (\Exception $e) {
+        dd('Google Error:', $e->getMessage());
+    }
+});
+
 // php artisan cache:clear
 // php artisan config:clear
 // php artisan route:clear

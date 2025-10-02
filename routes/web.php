@@ -29,10 +29,12 @@ require __DIR__.'/auth.php';
 
 // routes/web.php
 use App\Http\Controllers\Auth\GoogleLoginController;
+use App\Http\Controllers\Auth\FacebookLoginController;
 
 Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback']);
-
+Route::get('/auth/facebook', [FacebookLoginController::class, 'redirectToFacebook'])->name('facebook.login');
+Route::get('/auth/facebook/callback', [FacebookLoginController::class, 'handleFacebookCallback']);
 
 // routes/web.php (temporary debug route)
 Route::get('/debug-google', function () {
